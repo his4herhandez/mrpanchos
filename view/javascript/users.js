@@ -48,6 +48,7 @@ $('body').on('click', '#salirSistema', () => {
 
 /** validacion para colocar modulo Agregar Usuario */
 $('body').on('click', '#colocarContenedorAgregarUsuario', () => {
+    
     let modulo = document.querySelector('#moduloAgregarUsuario');
     if(!modulo) {
         colocarModuloAgregarUsuario();
@@ -57,10 +58,29 @@ $('body').on('click', '#colocarContenedorAgregarUsuario', () => {
 })
 
 
+/** desvincular modulo Agregar Usuario */
 $('body').on('click', '#cancelarUsuario', () => {
 
     $('#moduloAgregarUsuario').remove();
+});
+
+
+/** guardar Usuario */
+$('body').on('click', '#guardarUsuario', () => {
+
+    let arrCkUsers = ['hacker', 'man', 'woman', 'turtle', 'owl', 'chick'];
+    arrCkUsers.forEach(element => {
+        $('#' + element).attr('checked');
+    });
 })
+
+
+const changePicture = () => {
+
+    let img = document.querySelector('#fotoUsuario').files[0];
+    let type = 'U';
+    validarFotografia(img, type);
+}
 
 
 colocarModuloAgregarUsuario = () => {
@@ -92,23 +112,79 @@ colocarModuloAgregarUsuario = () => {
                             '<input type="password" class="form-control" id="ingresoNuevoConfirmarPassword" placeholder="Confirma la contraseña" onfocusout="confirmarPass();">' +
                         '</div>' +
                         '<div class="col-xs-12 col-md-6 form-group">' +
-                            '<label for="fotoUsuario">Subir fotografía</label>' +
-                            '<input type="file" id="fotoUsuario">' +
-                            '<p class="help-block">El tamaño permitido es 200MB.</p>' +
+                            '<label for="ingresoNuevoClave">Clave:</label>' +
+                            '<input type="text" class="form-control" id="ingresoNuevoClave" placeholder="Ingresa un distintivo para recordar tu contraseña" onfocusout="validarClave();">' +
                         '</div>' +
-                        '<div class="col-xs-12 col-md-6 form-group">' +
-                            '<label for="fotoUsuario">Fotografía</label><br>' +
-                            '<img src="view/img/users/default/anonymous.png" class="img-thumbnail" width="100px" alt="anonymous">' +
+                        '<div id="ckUser">' +
+                            '<div class="col-xs-12 col-md-2 form-group">' +
+                                '<div class="custom-control custom-radio image-checkbox">' +
+                                    '<input type="radio" class="custom-control-input" id="hacker" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<label class="custom-control-label" for="hacker">' +
+                                        '<img src="view/img/users/profiles/hacker.png" width="100px" alt="#" class="img-fluid margin">' +
+                                    '</label>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="col-xs-12 col-md-2 form-group">' +
+                                '<div class="custom-control custom-radio image-checkbox">' +
+                                    '<input type="radio" class="custom-control-input" id="woman" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<label class="custom-control-label" for="woman">' +
+                                        '<img src="view/img/users/profiles/woman.png" width="100px" alt="#" class="img-fluid margin">' +
+                                    '</label>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="col-xs-12 col-md-2 form-group">' +
+                                '<div class="custom-control custom-radio image-checkbox">' +
+                                    '<input type="radio" class="custom-control-input" id="turtle" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<label class="custom-control-label" for="turtle">' +
+                                        '<img src="view/img/users/profiles/turtle.png" width="100px" alt="#" class="img-fluid margin">' +
+                                    '</label>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="col-xs-12 col-md-2 form-group">' +
+                                '<div class="custom-control custom-radio image-checkbox">' +
+                                    '<input type="radio" class="custom-control-input" id="man" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<label class="custom-control-label" for="man">' +
+                                        '<img src="view/img/users/profiles/man.png" width="100px" alt="#" class="img-fluid margin">' +
+                                    '</label>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="col-xs-12 col-md-2 form-group">' +
+                                '<div class="custom-control custom-radio image-checkbox">' +
+                                    '<input type="radio" class="custom-control-input" id="owl" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<label class="custom-control-label" for="owl">' +
+                                        '<img src="view/img/users/profiles/owl.png" width="100px" alt="#" class="img-fluid margin">' +
+                                    '</label>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="col-xs-12 col-md-2 form-group">' +
+                                '<div class="custom-control custom-radio image-checkbox">' +
+                                    '<input type="radio" class="custom-control-input" id="chick" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<label class="custom-control-label" for="chick">' +
+                                        '<img src="view/img/users/profiles/chick.png" width="100px" alt="#" class="img-fluid margin">' +
+                                ' </label>' +
+                                '</div>' +
+                            '</div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
                 '<div class="box-footer">' +
-                    '<button type="button" class="btn btn-sm bg-olive pull-right margin" id="guardarUsuario">Agregar usuario</button>' +
+                    '<button type="button" class="btn btn-sm bg-olive pull-right margin disabled" id="guardarUsuario">Agregar usuario</button>' +
                     '<button type="button" class="btn btn-sm btn-danger pull-right margin" id="cancelarUsuario">Cancelar</button>' +
                 '</div>' +
             '</div>';
 
     $('#contenidoUsuarios').prepend(modulo);
+}
+
+
+const obtenerEstado = (obj) => {
+
+    let arrCkUsers = ['hacker', 'man', 'woman', 'turtle', 'owl', 'chick'];
+    arrCkUsers.forEach(element => {
+        $('#' + element).attr('src', 'no');
+    });
+    
+    $('#ckUser').find('input:radio[id="' + obj.id  + '"]').attr('src', 'si');
 }
 
 

@@ -100,6 +100,7 @@ session_start();
     <script src="view/javascript/users.js?v=<?php echo rand(); ?>"></script>
     <script src="view/javascript/regex.js?v=<?php echo rand(); ?>"></script>
     <script src="view/javascript/datatables.js?v=<?php echo rand(); ?>"></script>
+    <script src="view/javascript/validarFotografias.js?v=<?php echo rand(); ?>"></script>
 
 
 </body>

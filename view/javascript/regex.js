@@ -1,6 +1,6 @@
 const validarUsuario = (valor) => {
     var test = valor
-    return /^[a-zA-Záéíóú0-9]+$/.test(test);
+    return /(?=\w*[a-zA-Záéíóú0-9])\S{8,16}$/.test(test);
 }
 
 const ValidarPassword = (valor) => {
@@ -36,7 +36,10 @@ if(document.querySelector('#ingresoUsuarioLogin')) {
 const validarNombreUsuario = () => {
     let nombre = document.querySelector('#ingresoNuevoNombre').value;
     if(validarNombre(nombre)) {
+
         document.querySelector('#ingresoNuevoNombre').classList.add('text-green')
+        document.querySelector('#guardarUsuario').classList.remove('disabled')
+        
         document.querySelector('#ingresoNuevoNombre').classList.remove('text-red')
         setTimeout(() => {
 
@@ -44,7 +47,8 @@ const validarNombreUsuario = () => {
          }, 3000);
     } else {
         document.querySelector('#ingresoNuevoNombre').classList.remove('text-green')
-        document.querySelector('#ingresoNuevoNombre').focus();
+        document.querySelector('#guardarUsuario').classList.add('disabled')
+        
         document.querySelector('#ingresoNuevoNombre').classList.add('text-red')
     }
 }
@@ -52,15 +56,19 @@ const validarNombreUsuario = () => {
 const validarApellidosUsuario = () => {
     let apellidos = document.querySelector('#ingresoNuevoApellidos').value;
     if(validarNombre(apellidos)) {
+
         document.querySelector('#ingresoNuevoApellidos').classList.add('text-green')
+        document.querySelector('#guardarUsuario').classList.remove('disabled')
+
         document.querySelector('#ingresoNuevoApellidos').classList.remove('text-red')
+
         setTimeout(() => {
 
             document.querySelector('#ingresoNuevoApellidos').classList.remove('text-green')
          }, 3000);
     } else {
+        document.querySelector('#guardarUsuario').classList.add('disabled')
         document.querySelector('#ingresoNuevoApellidos').classList.remove('text-green')
-        document.querySelector('#ingresoNuevoApellidos').focus();
         document.querySelector('#ingresoNuevoApellidos').classList.add('text-red')
     }
 }
@@ -68,6 +76,8 @@ const validarApellidosUsuario = () => {
 const validarUser = () => {ingresoNuevoUsuario
     let user = document.querySelector('#ingresoNuevoUsuario').value;
     if(validarUsuario(user)) {
+
+        document.querySelector('#guardarUsuario').classList.remove('disabled')
         document.querySelector('#ingresoNuevoUsuario').classList.add('text-green')
         document.querySelector('#ingresoNuevoUsuario').classList.remove('text-red')
         setTimeout(() => {
@@ -75,8 +85,9 @@ const validarUser = () => {ingresoNuevoUsuario
             document.querySelector('#ingresoNuevoUsuario').classList.remove('text-green')
          }, 3000);
     } else {
+
+        document.querySelector('#guardarUsuario').classList.add('disabled')
         document.querySelector('#ingresoNuevoUsuario').classList.remove('text-green')
-        document.querySelector('#ingresoNuevoUsuario').focus();
         document.querySelector('#ingresoNuevoUsuario').classList.add('text-red')
     }
 }
@@ -84,6 +95,8 @@ const validarUser = () => {ingresoNuevoUsuario
 const validarPass = () => {
     let password = document.querySelector('#ingresoNuevoPassword').value;
     if(ValidarPassword(password)) {
+
+        document.querySelector('#guardarUsuario').classList.remove('disabled')
         document.querySelector('#ingresoNuevoPassword').classList.add('text-green')
         document.querySelector('#ingresoNuevoPassword').classList.remove('text-red')
         setTimeout(() => {
@@ -91,8 +104,9 @@ const validarPass = () => {
             document.querySelector('#ingresoNuevoPassword').classList.remove('text-green')
          }, 3000);
     } else {
+
+        document.querySelector('#guardarUsuario').classList.add('disabled')
         document.querySelector('#ingresoNuevoPassword').classList.remove('text-green')
-        document.querySelector('#ingresoNuevoPassword').focus();
         document.querySelector('#ingresoNuevoPassword').classList.add('text-red')
     }
 }
@@ -101,6 +115,8 @@ const confirmarPass = () => {
     let confirmPassword = document.querySelector('#ingresoNuevoConfirmarPassword').value;
     let password = document.querySelector('#ingresoNuevoPassword').value;
     if(ValidarPassword(confirmPassword) && confirmPassword === password) {
+
+        document.querySelector('#guardarUsuario').classList.remove('disabled')
         document.querySelector('#ingresoNuevoConfirmarPassword').classList.add('text-green')
         document.querySelector('#ingresoNuevoConfirmarPassword').classList.remove('text-red')
         setTimeout(() => {
@@ -108,9 +124,30 @@ const confirmarPass = () => {
             document.querySelector('#ingresoNuevoConfirmarPassword').classList.remove('text-green')
          }, 3000);
     } else {
+
+        document.querySelector('#guardarUsuario').classList.add('disabled')
         document.querySelector('#ingresoNuevoConfirmarPassword').classList.remove('text-green')
-        document.querySelector('#ingresoNuevoConfirmarPassword').focus();
         document.querySelector('#ingresoNuevoConfirmarPassword').classList.add('text-red')
+    }
+}
+
+const validarClave = () => {
+
+    let clave = document.querySelector('#ingresoNuevoClave').value;
+    if(validarNombre(clave)) {
+
+        document.querySelector('#guardarUsuario').classList.remove('disabled')
+        document.querySelector('#ingresoNuevoClave').classList.add('text-green')
+        document.querySelector('#ingresoNuevoClave').classList.remove('text-red')
+        setTimeout(() => {
+
+            document.querySelector('#ingresoNuevoClave').classList.remove('text-green')
+         }, 3000);
+    } else {
+
+        document.querySelector('#guardarUsuario').classList.add('disabled')
+        document.querySelector('#ingresoNuevoClave').classList.remove('text-green')
+        document.querySelector('#ingresoNuevoClave').classList.add('text-red')
     }
 }
 
