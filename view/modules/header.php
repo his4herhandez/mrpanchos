@@ -1,3 +1,8 @@
+<?php
+    $nombreCompleto = $_SESSION['NAME'] . " " . $_SESSION['SURNAME'];
+    $avatar = $_SESSION['URLAVATAR'];
+?>
+
 <header class="main-header">
 
     <!-- logotipo -->
@@ -16,8 +21,8 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="view/img/users/default/anonymous.png" class="user-image">
-                        <span class="hidden-xs">Rigoberto Hernandez</span>
+                        <img src="<?php echo $avatar ?>" class="user-image">
+                        <span class="hidden-xs"><?php echo $nombreCompleto ;?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-body">

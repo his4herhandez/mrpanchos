@@ -68,10 +68,49 @@ $('body').on('click', '#cancelarUsuario', () => {
 /** guardar Usuario */
 $('body').on('click', '#guardarUsuario', () => {
 
-    let arrCkUsers = ['hacker', 'man', 'woman', 'turtle', 'owl', 'chick'];
-    arrCkUsers.forEach(element => {
-        $('#' + element).attr('checked');
-    });
+    let avatar = obtenerAvatar();
+    if(avatar == 'NA') {
+
+        swal({
+            title: `Selecciona un avatar`,
+            text: "Antes de continuar tendras que seleccionar un avatar obligatoriamente",
+            icon: "warning",
+            button: "Continuar!",
+        });
+    } else {
+
+        let urlAvatar = 'view/img/users/profiles/' + avatar  + '.png';
+        let nombre = document.querySelector('#ingresoNuevoNombre').value;
+        let apellidos = document.querySelector('#ingresoNuevoApellidos').value;
+        let usuario = document.querySelector('#ingresoNuevoUsuario').value;
+        let password = document.querySelector('#ingresoNuevoPassword').value;
+        let confirmPassword = document.querySelector('#ingresoNuevoConfirmarPassword').value;
+        let clave = document.querySelector('#ingresoNuevoClave').value;
+    
+        let arrUser = [ nombre, apellidos, usuario, password, clave, urlAvatar ]
+        let datosUser = {
+            'nombre': nombre, 
+            'apellidos': apellidos, 
+            'usuario': usuario, 
+            'password': password, 
+            'clave': clave, 
+            'urlAvatar': urlAvatar
+        }
+        
+        if(confirmPassword != password) {
+            
+            swal({
+                title: `Las contraseñas no coinciden`,
+                text: "Datos incorrectos",
+                icon: "warning",
+                button: "Continuar!",
+            });
+        } else {
+            
+            guardarUsuario(arrUser, datosUser);
+        }
+    }
+    
 })
 
 
@@ -116,49 +155,49 @@ colocarModuloAgregarUsuario = () => {
                             '<input type="text" class="form-control" id="ingresoNuevoClave" placeholder="Ingresa un distintivo para recordar tu contraseña" onfocusout="validarClave();">' +
                         '</div>' +
                         '<div id="ckUser">' +
-                            '<div class="col-xs-12 col-md-2 form-group">' +
+                            '<div class="col-xs-12 col-md-2 form-group text-center">' +
                                 '<div class="custom-control custom-radio image-checkbox">' +
-                                    '<input type="radio" class="custom-control-input" id="hacker" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<input type="radio" class="custom-control-input" id="hacker" name="ck2" onclick="colocarEstado(this);">' +
                                     '<label class="custom-control-label" for="hacker">' +
                                         '<img src="view/img/users/profiles/hacker.png" width="100px" alt="#" class="img-fluid margin">' +
                                     '</label>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="col-xs-12 col-md-2 form-group">' +
+                            '<div class="col-xs-12 col-md-2 form-group text-center">' +
                                 '<div class="custom-control custom-radio image-checkbox">' +
-                                    '<input type="radio" class="custom-control-input" id="woman" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<input type="radio" class="custom-control-input" id="woman" name="ck2" onclick="colocarEstado(this);">' +
                                     '<label class="custom-control-label" for="woman">' +
                                         '<img src="view/img/users/profiles/woman.png" width="100px" alt="#" class="img-fluid margin">' +
                                     '</label>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="col-xs-12 col-md-2 form-group">' +
+                            '<div class="col-xs-12 col-md-2 form-group text-center">' +
                                 '<div class="custom-control custom-radio image-checkbox">' +
-                                    '<input type="radio" class="custom-control-input" id="turtle" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<input type="radio" class="custom-control-input" id="turtle" name="ck2" onclick="colocarEstado(this);">' +
                                     '<label class="custom-control-label" for="turtle">' +
                                         '<img src="view/img/users/profiles/turtle.png" width="100px" alt="#" class="img-fluid margin">' +
                                     '</label>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="col-xs-12 col-md-2 form-group">' +
+                            '<div class="col-xs-12 col-md-2 form-group text-center">' +
                                 '<div class="custom-control custom-radio image-checkbox">' +
-                                    '<input type="radio" class="custom-control-input" id="man" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<input type="radio" class="custom-control-input" id="man" name="ck2" onclick="colocarEstado(this);">' +
                                     '<label class="custom-control-label" for="man">' +
                                         '<img src="view/img/users/profiles/man.png" width="100px" alt="#" class="img-fluid margin">' +
                                     '</label>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="col-xs-12 col-md-2 form-group">' +
+                            '<div class="col-xs-12 col-md-2 form-group text-center">' +
                                 '<div class="custom-control custom-radio image-checkbox">' +
-                                    '<input type="radio" class="custom-control-input" id="owl" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<input type="radio" class="custom-control-input" id="owl" name="ck2" onclick="colocarEstado(this);">' +
                                     '<label class="custom-control-label" for="owl">' +
                                         '<img src="view/img/users/profiles/owl.png" width="100px" alt="#" class="img-fluid margin">' +
                                     '</label>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="col-xs-12 col-md-2 form-group">' +
+                            '<div class="col-xs-12 col-md-2 form-group text-center">' +
                                 '<div class="custom-control custom-radio image-checkbox">' +
-                                    '<input type="radio" class="custom-control-input" id="chick" name="ck2" onclick="obtenerEstado(this);">' +
+                                    '<input type="radio" class="custom-control-input" id="chick" name="ck2" onclick="colocarEstado(this);">' +
                                     '<label class="custom-control-label" for="chick">' +
                                         '<img src="view/img/users/profiles/chick.png" width="100px" alt="#" class="img-fluid margin">' +
                                 ' </label>' +
@@ -177,7 +216,7 @@ colocarModuloAgregarUsuario = () => {
 }
 
 
-const obtenerEstado = (obj) => {
+const colocarEstado = (obj) => {
 
     let arrCkUsers = ['hacker', 'man', 'woman', 'turtle', 'owl', 'chick'];
     arrCkUsers.forEach(element => {
@@ -185,6 +224,83 @@ const obtenerEstado = (obj) => {
     });
     
     $('#ckUser').find('input:radio[id="' + obj.id  + '"]').attr('src', 'si');
+}
+
+
+const obtenerAvatar = () => {
+
+    let arrCkUsers = ['hacker', 'man', 'woman', 'turtle', 'owl', 'chick'];
+    let avatar = 'NA';
+    arrCkUsers.forEach(element => {
+        if($('#' + element).attr('src') == 'si') {
+
+            avatar = $('#' + element).attr('id');
+        }
+    });
+    return avatar;
+}
+
+const guardarUsuario = (arrUser, datosUser) => {
+
+    
+    if(!validarDatosUsuario(arrUser)) {
+
+        swal({
+            title: `Datos incorrectos`,
+            text: "Hay campos vacios, por favor intenta de nuevo",
+            icon: "warning",
+            button: "Continuar!",
+        });
+    } else {
+
+        $.ajax({
+            data: {
+                'nombre': datosUser.nombre, 
+                'apellidos': datosUser.apellidos, 
+                'usuario': datosUser.usuario, 
+                'password': datosUser.password, 
+                'clave': datosUser.clave, 
+                'urlAvatar': datosUser.urlAvatar
+            },
+            url: 'ajax/users.ajax.php?function=guardarUsuario',
+            type: 'post',
+            typeData: 'json',
+            success: (resp) => {
+                let JSONresp = JSON.parse(resp);
+
+                if(JSONresp.execute == 'ok') {
+
+                    swal({
+                        title: `Datos correctos`,
+                        text: "Usuario agregado correctamente",
+                        icon: "success",
+                        button: "Continuar!",
+                    }).then((e) => {
+                        window.location = 'users';
+                    })
+                } else if(JSONresp.execute == false) {
+
+                    swal({
+                        title: `Datos incorrectos`,
+                        text: "Por favor intenta de nuevo",
+                        icon: "warning",
+                        button: "Continuar!",
+                    });
+                } else if (JSONresp.execute == 'error') {
+
+                    swal({
+                        title: `Surgio un error`,
+                        text: "Intenta de nuevo o comunicate con el desarrollador",
+                        icon: "error",
+                        button: "Continuar!",
+                    });
+                }
+            },
+            error: (resp) => {
+                console.log(resp)
+            }
+        })
+    }
 }
 
 
@@ -303,3 +419,17 @@ olvidarCrendenciales = () => {
         }
     });
 }
+
+
+validarDatosUsuario = (arrUser) => {
+
+    let validacion = true;
+    arrUser.forEach(element => {
+        if(element == '') {
+
+            validacion = false;
+        }
+    });
+    return validacion;
+}
+

@@ -18,6 +18,21 @@ class UserAjax {
         $respuesta = UserController::olvidarCredenciales();
         echo json_encode($respuesta);
     }
+
+    function guardarUsuario()
+    {
+        $datos = [
+            'nombre' => $_POST['nombre'],
+            'apellidos' => $_POST['apellidos'],
+            'usuario' => $_POST['usuario'],
+            'password' => $_POST['password'],
+            'clave' => $_POST['clave'],
+            'urlAvatar' => $_POST['urlAvatar'],
+        ];
+        $respuesta = UserController::guardarUsuario($datos);
+        echo json_encode($respuesta);
+
+    }
 }
 
 if(isset($_GET['function'])) {
